@@ -1,143 +1,88 @@
+멋진 로딩 애니메이션을 만드셨네요! 두 개의 움직이는 사각형으로 시각적인 피드백을 주는 훌륭한 CSS 애니메이션 예시입니다.
 
-CSS Loading Animation: 닷지볼(Dodgeball) 스타일 로딩 인디케이터
-이 프로젝트는 CSS animation과 @keyframes를 활용하여 두 개의 작은 사각형이 경로를 따라 움직이며 로딩 중임을 시각적으로 보여주는 애니메이션입니다. 마치 작은 공들이 서로를 피해 움직이는 듯한 '닷지볼' 스타일의 로딩 인디케이터를 구현했습니다.
+아래는 이 코드를 GitHub 저장소에 올릴 때 사용하기 좋은 설명으로, 애니메이션이 어떻게 작동하는지 자세히 알려줍니다.
 
-🚀 프로젝트 미리보기
-![bandicam 2025-05-30 16-50-32-863](https://github.com/user-attachments/assets/58071658-cbfe-4768-b59c-d0356e5f4575)
+기하학 로딩 애니메이션
+이 프로젝트는 HTML과 CSS만으로 만들어진 간단하지만 매력적인 로딩 애니메이션을 보여줍니다. 두 개의 작은 사각형이 보이지 않는 큰 사각형 주변을 동기화된 움직임으로 돌면서, 전환될 때마다 색상이 변하여 콘텐츠가 로딩 중임을 나타냅니다.
 
+작동 방식
+애니메이션은 <div> 컨테이너 안에 배치된 두 개의 <span> 요소로 구성됩니다. 각 <span>은 움직이는 사각형 중 하나를 나타내며, .loading div는 이들의 경계 역할을 합니다.
 
-🛠️ 사용된 기술 스택
-HTML5: 기본 구조 정의
-CSS3: 스타일링 및 애니메이션 구현 (@keyframes, animation, nth-child 등)
-Google Web Fonts: Raleway 폰트 임포트
-🧩 코드 설명
-1. HTML 구조 (index.html)
-아주 간단한 구조로, 로딩 애니메이션을 담을 컨테이너 (.loading)와 그 안에 움직일 두 개의 <span> 요소를 정의합니다.
-
+HTML 구조
 HTML
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>2) 도형 로딩 애니메이션-02</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <div class="loading">
-    <span></span>
-    <span></span>
-  </div>
-
-</body>
-</html>
-<div class="loading">: 두 개의 <span>을 감싸는 부모 컨테이너입니다. 이 컨테이너의 크기를 기반으로 자식 <span>들이 움직입니다.
-<span></span>: 실제로 움직이는 두 개의 작은 사각형(공)입니다.
-2. CSS 스타일링 및 애니메이션 (style.css)
-CSS 파일은 body의 기본 스타일링과 로딩 애니메이션의 핵심 로직을 포함합니다.
+<div class="loading">
+  <span></span>
+  <span></span>
+</div>
+loading 클래스를 가진 바깥쪽 div는 애니메이션의 무대 역할을 합니다. 이것은 내부 <span> 요소가 움직일 30x30 픽셀의 컨테이너입니다.
+두 개의 <span> 태그는 실제로 애니메이션되는 요소들입니다.
+CSS 스타일링 및 애니메이션
+마법은 CSS에서 일어납니다. 여기서 사각형의 모양과 움직임을 정의합니다.
 
 CSS
-
-/* Google Web Font */
-@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
-
-body {
-  font-family: 'Raleway', sans-serif;
-  line-height: 1.5em;
-  margin: 0;
-  font-weight: 300;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* 뷰포트 전체 높이를 사용하여 요소를 중앙에 배치 */
-}
-a {
-  text-decoration: none; /* 예시에는 없지만, 일반적인 스타일링 습관 */
-}
 
 .loading {
   width: 30px;
   height: 30px;
-  position: relative; /* 자식 span의 absolute 포지셔닝 기준 */
+  position: relative; /* 자식 요소의 절대 위치 지정을 허용 */
 }
 
 .loading span {
-  position: absolute; /* 부모 .loading 기준 위치 지정 */
+  position: absolute; /* 부모(.loading)에 상대적으로 사각형 위치 지정 */
   width: 10px;
   height: 10px;
-  background-color: gray; /* 기본 배경색 */
+  background-color: gray; /* 기본 색상 */
   top: 0;
-  left: 0; /* 초기 위치는 부모의 좌상단 */
-  animation: loading 1.5s infinite; /* animation 속성: 애니메이션 이름, 지속 시간, 반복 횟수 */
+  left: 0;
+  animation: loading 1.5s infinite; /* 'loading' 애니메이션 적용 */
 }
 
 .loading span:nth-child(1) {
-  background-color: crimson; /* 첫 번째 span은 붉은색 */
+  background-color: crimson; /* 첫 번째 사각형의 기본 색상 재정의 */
 }
 
 .loading span:nth-child(2) {
-  animation-delay: 0.8s; /* 두 번째 span은 0.8초 늦게 애니메이션 시작 */
+  animation-delay: 0.8s; /* 두 번째 사각형의 애니메이션 시작을 지연 */
 }
 
-/* @keyframes: 'loading' 애니메이션 정의 */
 @keyframes loading {
-  0% { /* 애니메이션 시작 (0%) */
+  0% {
     top: 0;
     left: 0;
   }
-  25% { /* 25% 지점 */
+  25% {
     top: 0;
-    left: calc(100% - 10px); /* 오른쪽 끝으로 이동 (요소 너비 고려) */
-    background-color: dodgerblue; /* 색상 변경 */
+    left: calc(100% - 10px); /* 오른쪽 위 모서리로 이동 */
+    background-color: dodgerblue;
   }
-  50% { /* 50% 지점 */
-    top: calc(100% - 10px); /* 아래쪽 끝으로 이동 (요소 높이 고려) */
-    left: calc(100% - 10px); /* 오른쪽 끝 유지 */
-    background-color: orange; /* 색상 변경 */
+  50% {
+    top: calc(100% - 10px); /* 오른쪽 아래 모서리로 이동 */
+    left: calc(100% - 10px);
+    background-color: orange;
   }
-  75% { /* 75% 지점 */
-    top: calc(100% - 10px); /* 아래쪽 끝 유지 */
-    left: 0; /* 왼쪽 끝으로 이동 */
-    background-color: yellowgreen; /* 색상 변경 */
-  }
-  100% { /* 애니메이션 종료 (100%), 다시 초기 위치로 */
-    top: 0;
+  75% {
+    top: calc(100% - 10px); /* 왼쪽 아래 모서리로 이동 */
     left: 0;
+    background-color: yellowgreen;
+  }
+  100% {
+    top: 0;
+    left: 0; /* 왼쪽 위 모서리로 돌아옴 */
   }
 }
-CSS 주요 포인트 설명:
-body 스타일:
-
-display: flex; justify-content: center; align-items: center; height: 100vh; 를 사용하여 .loading 컨테이너를 브라우저 뷰포트의 정중앙에 배치합니다.
-.loading 컨테이너:
-
-width: 30px; height: 30px;: 애니메이션이 일어날 공간의 크기를 정의합니다.
-position: relative;: 자식 <span> 요소들이 position: absolute;를 사용할 때, 이 부모 .loading을 기준으로 위치가 계산되도록 합니다.
-.loading span (움직이는 사각형):
-
-position: absolute;: 부모 .loading 컨테이너 내에서 자유롭게 위치를 이동시킬 수 있게 합니다.
-width: 10px; height: 10px;: 각 사각형의 크기입니다. 이 크기는 @keyframes에서 calc() 함수를 사용할 때 중요합니다 (100% - 10px).
-animation: loading 1.5s infinite;:
-loading: @keyframes로 정의된 애니메이션의 이름입니다.
-1.5s: 애니메이션이 한 번 완료되는 데 걸리는 시간입니다.
-infinite: 애니메이션을 무한히 반복합니다.
-span:nth-child(1) 및 span:nth-child(2) (각 사각형의 개별 설정):
-
-span:nth-child(1): 첫 번째 <span>은 배경색을 crimson (진홍색)으로 설정하여 두 번째 <span>과 시각적으로 구분합니다.
-span:nth-child(2): animation-delay: 0.8s;를 적용하여 첫 번째 <span>보다 0.8초 늦게 애니메이션을 시작하게 합니다. 이 지연 덕분에 두 사각형이 서로를 따라다니거나 피해가는 듯한 동적인 효과가 연출됩니다.
-@keyframes loading (애니메이션 정의):
-
-이 블록은 loading이라는 이름의 애니메이션이 시간 흐름에 따라 어떻게 변할지 정의합니다.
-0%: 시작점. top: 0; left: 0; (좌상단)
-25%: top: 0; left: calc(100% - 10px); (우상단). .loading 컨테이너 너비의 100%에서 사각형 자체의 너비 10px을 빼서 정확히 오른쪽 끝에 위치하도록 합니다.
-50%: top: calc(100% - 10px); left: calc(100% - 10px); (우하단). top도 마찬가지로 100%에서 사각형 높이를 빼서 아래쪽 끝에 위치하도록 합니다.
-75%: top: calc(100% - 10px); left: 0; (좌하단).
-100%: top: 0; left: 0; (다시 좌상단). 한 바퀴를 돌아 처음 위치로 돌아옵니다.
-각 키프레임마다 background-color를 변경하여 시각적인 재미를 더했습니다.
-🌟 애니메이션의 작동 원리
-이 애니메이션은 두 개의 작은 사각형이 .loading이라는 30x30px 정사각형 컨테이너의 네 모서리를 시계 방향으로 이동하는 방식입니다.
-
-첫 번째 사각형 (Crimson): 0초부터 애니메이션을 시작하여 경로를 따라 움직입니다.
-두 번째 사각형 (Gray → Blue → Orange → Green): 첫 번째 사각형보다 0.8초 늦게 동일한 경로를 따라 움직입니다.
-이 미묘한 시간차이 덕분에 두 사각형이 겹치지 않고 서로를 피해 가는 듯한 역동적인 로딩 효과가 만들어집니다. 배경색 변화는 애니메이션의 각 단계에서 시각적인 피드백을 제공합니다.
+주요 CSS 속성:
+.loading의 position: relative;: 이 속성은 매우 중요합니다. position: absolute;를 가진 <span> 요소들이 body가 아닌 .loading 컨테이너에 상대적으로 배치될 수 있도록 합니다.
+.loading span의 position: absolute;: 이 속성은 span 요소들을 일반적인 문서 흐름에서 제외시켜 top, left, right, bottom 속성을 사용하여 정확하게 배치할 수 있도록 합니다.
+animation: loading 1.5s infinite;: 이것은 각 <span>에 loading 키프레임 애니메이션을 적용합니다.
+loading: @keyframes 규칙의 이름입니다.
+1.5s: 한 번의 애니메이션 주기(cycle)의 지속 시간입니다.
+infinite: 애니메이션이 무한히 반복됩니다.
+span:nth-child(2)의 animation-delay: 0.8s;: 이것이 "추격" 효과를 만들어냅니다. 두 번째 사각형은 첫 번째 사각형보다 0.8초 늦게 애니메이션을 시작하여 서로를 따라가는 것처럼 보이게 합니다.
+@keyframes loading: 이 규칙은 애니메이션의 다양한 단계를 정의합니다:
+0%: 시작 지점입니다. 두 사각형 모두 .loading 컨테이너의 왼쪽 위 모서리(top: 0; left: 0;)에서 시작합니다.
+25%: 사각형들이 오른쪽 위 모서리로 이동합니다. calc(100% - 10px)는 사각형 자체의 10px 너비/높이를 고려하여 컨테이너 가장자리에 정확히 위치하도록 합니다.
+50%: 사각형들이 오른쪽 아래 모서리로 이동합니다.
+75%: 사각형들이 왼쪽 아래 모서리로 이동합니다.
+100%: 사각형들이 왼쪽 위 모서리로 돌아와 주기를 완료하고 다시 시작합니다.
+background-color 변경: 각 키프레임에서 사각형의 background-color가 변경되어 움직임에 동적인 시각적 요소를 추가합니다. 첫 번째 <span>은 초기에는 crimson이고, 두 번째 <span>은 기본적으로 gray이며, 애니메이션 중에 둘 다 색상이 변합니다.
