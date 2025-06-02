@@ -106,5 +106,8 @@ CSS 변수를 수정하여 애니메이션을 쉽게 사용자 정의할 수 있
 .loading span의 width 및 height: 개별 사각형의 크기를 조정합니다.
 .loading span 및 :nth-child(1)의 background-color: 사각형의 초기 색상을 수정합니다.
 .loading span:nth-child(2)의 animation-delay: 두 사각형의 움직임 사이의 지연 시간을 제어합니다.
+
+animation 
+
 @keyframes loading의 animation 속성: 애니메이션의 속도와 타이밍을 세밀하게 조정합니다. 키프레임 내의 background-color 속성은 사각형이 움직일 때 색상을 변경합니다.
 궁금한 점이 있거나 추가 수정이 필요하시면 언제든지 문의해 주세요!
